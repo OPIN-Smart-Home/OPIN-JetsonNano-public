@@ -1,0 +1,1058 @@
+[
+    {
+        "id": "init_group_",
+        "type": "group",
+        "name": "",
+        "style": {
+            "stroke": "#9363b7",
+            "label": true
+        },
+        "nodes": [
+            "init_inject_",
+            "init_comment_",
+            "init_func1_",
+            "init_change_",
+            "init_fbout1_",
+            "init_func2_",
+            "init_fbout2_",
+            "init_exec1_",
+            "init_sw_",
+            "init_debug1_",
+            "init_exec2_",
+            "init_debug2_",
+            "init_fbout3_",
+            "init_func3_"
+        ],
+        "x": 14,
+        "y": 19,
+        "w": 912,
+        "h": 242
+    },
+    {
+        "id": "init_inject_",
+        "type": "inject",
+        "g": "init_group_",
+        "name": "init",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "init_change_",
+                "init_func2_",
+                "init_exec1_"
+            ]
+        ]
+    },
+    {
+        "id": "init_comment_",
+        "type": "comment",
+        "g": "init_group_",
+        "name": "Initialize State",
+        "info": "",
+        "x": 110,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "init_func1_",
+        "type": "function",
+        "g": "init_group_",
+        "name": "id",
+        "func": "var device_ip = msg.device_ip;\nvar rtsp = msg.rtsp;\nvar timestamp = new Date().toLocaleString();\n\nvar send2firebase = {\n    \"ip\": device_ip,\n    \"rtsp\": rtsp\n}\n\nmsg.payload = send2firebase;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 80,
+        "wires": [
+            [
+                "init_fbout1_"
+            ]
+        ]
+    },
+    {
+        "id": "init_change_",
+        "type": "change",
+        "g": "init_group_",
+        "name": "id",
+        "rules": [
+            {
+                "t": "set",
+                "p": "device_ip",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "rtsp",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 80,
+        "wires": [
+            [
+                "init_func1_"
+            ]
+        ]
+    },
+    {
+        "id": "init_fbout1_",
+        "type": "firebase-out",
+        "g": "init_group_",
+        "name": "id",
+        "database": "79a8c5635b5caad7",
+        "path": "",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 530,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "init_func2_",
+        "type": "function",
+        "g": "init_group_",
+        "name": "current",
+        "func": "var send2firebase = {\n    \"person\": 1,\n    \"ready\": 0\n}\n\nmsg.payload = send2firebase;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 120,
+        "wires": [
+            [
+                "init_fbout2_"
+            ]
+        ]
+    },
+    {
+        "id": "init_fbout2_",
+        "type": "firebase-out",
+        "g": "init_group_",
+        "name": "current",
+        "database": "79a8c5635b5caad7",
+        "path": "/current",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 420,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "init_exec1_",
+        "type": "exec",
+        "g": "init_group_",
+        "command": "docker ps -a --filter name=ip_camera --format {{.Names}}",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "container",
+        "x": 280,
+        "y": 200,
+        "wires": [
+            [
+                "init_sw_",
+                "init_debug1_"
+            ],
+            [
+                "init_debug1_"
+            ],
+            [
+                "init_debug1_"
+            ]
+        ]
+    },
+    {
+        "id": "init_sw_",
+        "type": "switch",
+        "g": "init_group_",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 180,
+        "wires": [
+            [
+                "init_exec2_"
+            ],
+            [
+                "init_func3_"
+            ]
+        ]
+    },
+    {
+        "id": "init_debug1_",
+        "type": "debug",
+        "g": "init_group_",
+        "name": "container",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "init_exec2_",
+        "type": "exec",
+        "g": "init_group_",
+        "command": "docker run --name ip_camera -t --ipc=host --runtime=nvidia --gpus all auto-off-cam:latest",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "2",
+        "winHide": false,
+        "oldrc": false,
+        "name": "run container",
+        "x": 570,
+        "y": 140,
+        "wires": [
+            [
+                "init_debug2_",
+                "init_func3_"
+            ],
+            [
+                "init_debug2_"
+            ],
+            [
+                "init_debug2_"
+            ]
+        ]
+    },
+    {
+        "id": "init_debug2_",
+        "type": "debug",
+        "g": "init_group_",
+        "name": "create container",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "init_fbout3_",
+        "type": "firebase-out",
+        "g": "init_group_",
+        "name": "ready",
+        "database": "79a8c5635b5caad7",
+        "path": "/current",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 850,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "init_func3_",
+        "type": "function",
+        "g": "init_group_",
+        "name": "ready",
+        "func": "var send2firebase = {\n    \"ready\": 1\n}\n\nmsg.payload = send2firebase;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 180,
+        "wires": [
+            [
+                "init_fbout3_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_group_",
+        "type": "group",
+        "name": "",
+        "style": {
+            "label": true,
+            "stroke": "#0070c0"
+        },
+        "nodes": [
+            "detect_fbget_",
+            "detect_change_",
+            "detect_exec1_",
+            "detect_sw1_",
+            "detect_debug1_",
+            "detect_exec2_",
+            "detect_debug2_",
+            "detect_exec3_",
+            "detect_debug3_",
+            "detect_comment_",
+            "detect_fbin1_",
+            "detect_sw2_",
+            "detect_func1_",
+            "detect_sw3_",
+            "detect_func2_",
+            "detect_fbin2_",
+            "detect_sw4_",
+            "detect_exec4_",
+            "detect_debug4_",
+            "detect_func3_",
+            "detect_sw5_",
+            "detect_debug5_",
+            "detect_exec5_",
+            "detect_debug6_",
+            "detect_func4_",
+            "detect_fbout_"
+        ],
+        "x": 14,
+        "y": 279,
+        "w": 1712,
+        "h": 242
+    },
+    {
+        "id": "detect_fbget_",
+        "type": "firebase-get",
+        "g": "detect_group_",
+        "name": "get data",
+        "constraint": {},
+        "database": "79a8c5635b5caad7",
+        "outputType": "auto",
+        "passThrough": false,
+        "path": "",
+        "pathType": "str",
+        "useConstraint": false,
+        "x": 380,
+        "y": 360,
+        "wires": [
+            [
+                "detect_change_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_change_",
+        "type": "change",
+        "g": "detect_group_",
+        "name": "arguments",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rtsp",
+                "pt": "msg",
+                "to": "payload.rtsp",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "path",
+                "pt": "msg",
+                "to": "/current/person",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 360,
+        "wires": [
+            [
+                "detect_sw2_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_exec1_",
+        "type": "exec",
+        "g": "detect_group_",
+        "command": "docker inspect --format '{{.State.Running}}' ip_camera",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "inspect",
+        "x": 800,
+        "y": 360,
+        "wires": [
+            [
+                "detect_debug1_",
+                "detect_func1_"
+            ],
+            [
+                "detect_debug1_"
+            ],
+            [
+                "detect_debug1_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_sw1_",
+        "type": "switch",
+        "g": "detect_group_",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1050,
+        "y": 380,
+        "wires": [
+            [
+                "detect_exec2_"
+            ],
+            [
+                "detect_debug2_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_debug1_",
+        "type": "debug",
+        "g": "detect_group_",
+        "name": "inspect",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "detect_exec2_",
+        "type": "exec",
+        "g": "detect_group_",
+        "command": "docker container start ip_camera",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "start",
+        "x": 1170,
+        "y": 360,
+        "wires": [
+            [
+                "detect_func2_"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "detect_debug2_",
+        "type": "debug",
+        "g": "detect_group_",
+        "name": "inspect true",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "detect_exec3_",
+        "type": "exec",
+        "g": "detect_group_",
+        "command": "docker container exec ip_camera python3 /ultralytics/autoOff.py",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "exec",
+        "x": 1450,
+        "y": 360,
+        "wires": [
+            [
+                "detect_debug3_"
+            ],
+            [
+                "detect_debug3_"
+            ],
+            [
+                "detect_debug3_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_debug3_",
+        "type": "debug",
+        "g": "detect_group_",
+        "name": "start ip camera",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "detect_comment_",
+        "type": "comment",
+        "g": "detect_group_",
+        "name": "Person Detection",
+        "info": "",
+        "x": 120,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "detect_fbin1_",
+        "type": "firebase-in",
+        "g": "detect_group_",
+        "name": "auto off ON",
+        "constraint": {},
+        "database": "79a8c5635b5caad7",
+        "listenerType": "child_added",
+        "outputType": "auto",
+        "path": "",
+        "useConstraint": false,
+        "x": 110,
+        "y": 360,
+        "wires": [
+            [
+                "detect_sw3_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_sw2_",
+        "type": "switch",
+        "g": "detect_group_",
+        "name": "",
+        "property": "payload.current.ready",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 360,
+        "wires": [
+            [
+                "detect_exec1_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_func1_",
+        "type": "function",
+        "g": "detect_group_",
+        "name": "trim",
+        "func": "msg.payload = msg.payload.trim();\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 380,
+        "wires": [
+            [
+                "detect_sw1_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_sw3_",
+        "type": "switch",
+        "g": "detect_group_",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "type_auto",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 250,
+        "y": 360,
+        "wires": [
+            [
+                "detect_fbget_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_func2_",
+        "type": "function",
+        "g": "detect_group_",
+        "name": "arguments",
+        "func": "msg.payload = msg.rtsp + \" \" + msg.path\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 360,
+        "wires": [
+            [
+                "detect_exec3_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_fbin2_",
+        "type": "firebase-in",
+        "g": "detect_group_",
+        "name": "auto off OFF",
+        "constraint": {},
+        "database": "79a8c5635b5caad7",
+        "listenerType": "child_removed",
+        "outputType": "auto",
+        "path": "",
+        "useConstraint": false,
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "detect_sw4_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_sw4_",
+        "type": "switch",
+        "g": "detect_group_",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "type_auto",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 250,
+        "y": 460,
+        "wires": [
+            [
+                "detect_exec4_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_exec4_",
+        "type": "exec",
+        "g": "detect_group_",
+        "command": "docker inspect --format '{{.State.Running}}' ip_camera",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "inspect",
+        "x": 380,
+        "y": 460,
+        "wires": [
+            [
+                "detect_debug4_",
+                "detect_func3_"
+            ],
+            [
+                "detect_debug4_"
+            ],
+            [
+                "detect_debug4_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_debug4_",
+        "type": "debug",
+        "g": "detect_group_",
+        "name": "inspect",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "detect_func3_",
+        "type": "function",
+        "g": "detect_group_",
+        "name": "trim",
+        "func": "msg.payload = msg.payload.trim();\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 440,
+        "wires": [
+            [
+                "detect_sw5_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_sw5_",
+        "type": "switch",
+        "g": "detect_group_",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 440,
+        "wires": [
+            [
+                "detect_debug5_"
+            ],
+            [
+                "detect_exec5_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_debug5_",
+        "type": "debug",
+        "g": "detect_group_",
+        "name": "inspect false",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "detect_exec5_",
+        "type": "exec",
+        "g": "detect_group_",
+        "command": "docker container stop ip_camera",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "stop",
+        "x": 750,
+        "y": 460,
+        "wires": [
+            [
+                "detect_func4_",
+                "detect_debug6_"
+            ],
+            [
+                "detect_debug6_"
+            ],
+            [
+                "detect_debug6_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_debug6_",
+        "type": "debug",
+        "g": "detect_group_",
+        "name": "stop ip camera",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "detect_func4_",
+        "type": "function",
+        "g": "detect_group_",
+        "name": "person",
+        "func": "var send2firebase = {\n    \"person\": 1\n}\n\nmsg.payload = send2firebase;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 440,
+        "wires": [
+            [
+                "detect_fbout_"
+            ]
+        ]
+    },
+    {
+        "id": "detect_fbout_",
+        "type": "firebase-out",
+        "g": "detect_group_",
+        "name": "person",
+        "database": "79a8c5635b5caad7",
+        "path": "/current",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 1050,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "conn_group_",
+        "type": "group",
+        "name": "",
+        "style": {
+            "stroke": "#ffC000",
+            "label": true
+        },
+        "nodes": [
+            "conn_comment_",
+            "conn_ping_",
+            "conn_sw_",
+            "conn_func1_",
+            "conn_func2_",
+            "conn_fbout_"
+        ],
+        "x": 14,
+        "y": 539,
+        "w": 612,
+        "h": 142
+    },
+    {
+        "id": "conn_comment_",
+        "type": "comment",
+        "g": "conn_group_",
+        "name": "Connection",
+        "info": "",
+        "x": 110,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "conn_ping_",
+        "type": "ping",
+        "g": "conn_group_",
+        "protocol": "IPv4",
+        "mode": "timed",
+        "name": "ping",
+        "host": "",
+        "timer": "5",
+        "inputs": 0,
+        "x": 90,
+        "y": 620,
+        "wires": [
+            [
+                "conn_sw_"
+            ]
+        ]
+    },
+    {
+        "id": "conn_sw_",
+        "type": "switch",
+        "g": "conn_group_",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 620,
+        "wires": [
+            [
+                "conn_func2_"
+            ],
+            [
+                "conn_func1_"
+            ]
+        ]
+    },
+    {
+        "id": "conn_func1_",
+        "type": "function",
+        "g": "conn_group_",
+        "name": "disconected",
+        "func": "var timestamp = new Date().toLocaleString();\n\nvar send2firebase = {\n    \"timestamp\": timestamp,\n    \"connection\": \"disconnected\"\n}\n\nmsg.payload = send2firebase;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 640,
+        "wires": [
+            [
+                "conn_fbout_"
+            ]
+        ]
+    },
+    {
+        "id": "conn_func2_",
+        "type": "function",
+        "g": "conn_group_",
+        "name": "conected",
+        "func": "var timestamp = new Date().toLocaleString();\n\nvar send2firebase = {\n    \"timestamp\": timestamp,\n    \"connection\": \"connected\"\n}\n\nmsg.payload = send2firebase;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 600,
+        "wires": [
+            [
+                "conn_fbout_"
+            ]
+        ]
+    },
+    {
+        "id": "conn_fbout_",
+        "type": "firebase-out",
+        "g": "conn_group_",
+        "name": "connection",
+        "database": "79a8c5635b5caad7",
+        "path": "/connection",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 530,
+        "y": 620,
+        "wires": []
+    }
+]

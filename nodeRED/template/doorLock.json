@@ -1,0 +1,410 @@
+[
+    {
+        "id": "mqtt_group_",
+        "type": "group",
+        "name": "",
+        "style": {
+            "stroke": "#ffC000",
+            "label": true
+        },
+        "nodes": [
+            "mqtt_status_",
+            "mqtt_func_",
+            "mqtt_comment_",
+            "mqtt_rbe_",
+            "mqtt_fbout_",
+            "mqtt_debug_"
+        ],
+        "x": 14,
+        "y": 339,
+        "w": 752,
+        "h": 142
+    },
+    {
+        "id": "mqtt_status_",
+        "type": "status",
+        "g": "mqtt_group_",
+        "name": "MQTT status",
+        "scope": [
+            "u2d_mqttout_",
+            "u2d_mqttin_"
+        ],
+        "x": 110,
+        "y": 420,
+        "wires": [
+            [
+                "mqtt_rbe_"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_func_",
+        "type": "function",
+        "g": "mqtt_group_",
+        "name": "device conn",
+        "func": "var timestamp = new Date().toLocaleString();\nvar parsed = msg.status.text.split(\":\")[1].split(\".\")[2];\nvar conn = parsed;\n\nvar send2firebase = {\n    \"timestamp\": timestamp,\n    \"connection\": conn\n}\n\nmsg.payload = send2firebase;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 420,
+        "wires": [
+            [
+                "mqtt_fbout_",
+                "mqtt_debug_"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_comment_",
+        "type": "comment",
+        "g": "mqtt_group_",
+        "name": "MQTT Connection",
+        "info": "",
+        "x": 130,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "mqtt_rbe_",
+        "type": "rbe",
+        "g": "mqtt_group_",
+        "name": "when status changes",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "status.text",
+        "topi": "topic",
+        "x": 300,
+        "y": 420,
+        "wires": [
+            [
+                "mqtt_func_"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_fbout_",
+        "type": "firebase-out",
+        "g": "mqtt_group_",
+        "name": "connection",
+        "database": "79a8c5635b5caad7",
+        "path": "/connection",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 650,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "mqtt_debug_",
+        "type": "debug",
+        "g": "mqtt_group_",
+        "name": "debug mqtt",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "init_group_",
+        "type": "group",
+        "name": "",
+        "style": {
+            "stroke": "#9363b7",
+            "label": true
+        },
+        "nodes": [
+            "init_inject_",
+            "init_fbout1_",
+            "init_comment_",
+            "init_func_",
+            "init_change_",
+            "init_fbout2_"
+        ],
+        "x": 14,
+        "y": 19,
+        "w": 532,
+        "h": 162
+    },
+    {
+        "id": "init_inject_",
+        "type": "inject",
+        "g": "init_group_",
+        "name": "state",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"state\":0}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "init_fbout1_",
+                "init_change_"
+            ]
+        ]
+    },
+    {
+        "id": "init_fbout1_",
+        "type": "firebase-out",
+        "g": "init_group_",
+        "name": "current",
+        "database": "79a8c5635b5caad7",
+        "path": "/current",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 240,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "init_comment_",
+        "type": "comment",
+        "g": "init_group_",
+        "name": "Initialize State",
+        "info": "",
+        "x": 110,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "init_func_",
+        "type": "function",
+        "g": "init_group_",
+        "name": "id",
+        "func": "var device_id = msg.device_id;\nvar device_ip = msg.device_ip;\nvar timestamp = new Date().toLocaleString();\n\nvar send2firebase = {\n    \"dataId\": device_id,\n    \"ip\": device_ip\n}\n\nmsg.payload = send2firebase;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 100,
+        "wires": [
+            [
+                "init_fbout2_"
+            ]
+        ]
+    },
+    {
+        "id": "init_change_",
+        "type": "change",
+        "g": "init_group_",
+        "name": "id",
+        "rules": [
+            {
+                "t": "set",
+                "p": "device_id",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "device_ip",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "init_func_"
+            ]
+        ]
+    },
+    {
+        "id": "init_fbout2_",
+        "type": "firebase-out",
+        "g": "init_group_",
+        "name": "id",
+        "database": "79a8c5635b5caad7",
+        "path": "",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 470,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "u2d_group_",
+        "type": "group",
+        "name": "",
+        "style": {
+            "stroke": "#0070c0",
+            "label": true
+        },
+        "nodes": [
+            "u2d_fbin_",
+            "u2d_mqttout_",
+            "u2d_comment_",
+            "u2d_sw_",
+            "u2d_mqttin_",
+            "u2d_fbout_",
+            "u2d_func_"
+        ],
+        "x": 14,
+        "y": 199,
+        "w": 772,
+        "h": 122
+    },
+    {
+        "id": "u2d_fbin_",
+        "type": "firebase-in",
+        "g": "u2d_group_",
+        "name": "current",
+        "constraint": {},
+        "database": "79a8c5635b5caad7",
+        "listenerType": "value",
+        "outputType": "auto",
+        "path": "/current/state",
+        "useConstraint": false,
+        "x": 90,
+        "y": 280,
+        "wires": [
+            [
+                "u2d_sw_"
+            ]
+        ]
+    },
+    {
+        "id": "u2d_mqttout_",
+        "type": "mqtt out",
+        "g": "u2d_group_",
+        "name": "u2d",
+        "topic": "/u2d",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "broker_",
+        "x": 330,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "u2d_comment_",
+        "type": "comment",
+        "g": "u2d_group_",
+        "name": "User to Device",
+        "info": "",
+        "x": 120,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "u2d_sw_",
+        "type": "switch",
+        "g": "u2d_group_",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "u2d_mqttout_"
+            ]
+        ]
+    },
+    {
+        "id": "u2d_mqttin_",
+        "type": "mqtt in",
+        "g": "u2d_group_",
+        "name": "ack",
+        "topic": "/ack",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "broker_",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 450,
+        "y": 280,
+        "wires": [
+            [
+                "u2d_func_"
+            ]
+        ]
+    },
+    {
+        "id": "u2d_fbout_",
+        "type": "firebase-out",
+        "g": "u2d_group_",
+        "name": "current",
+        "database": "79a8c5635b5caad7",
+        "path": "/current",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 700,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "u2d_func_",
+        "type": "function",
+        "g": "u2d_group_",
+        "name": "data",
+        "func": "var state = msg.payload.state\n\nvar send2firebase = {\n    \"state\": state\n}\n\nmsg.payload = send2firebase;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 280,
+        "wires": [
+            [
+                "u2d_fbout_"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,11 @@
+{
+  "name": "node-red-project",
+  "description": "A Node-RED Project",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@gogovega/node-red-contrib-firebase-realtime-database": "~0.5.4",
+    "node-red-contrib-postgresql": "~0.14.0",
+    "node-red-node-ping": "^0.3.3"
+  }
+}

@@ -1,0 +1,901 @@
+[
+    {
+        "id": "1dd84e968a02dc7e",
+        "type": "tab",
+        "label": "Device Manager",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dcb73e360ef77f31",
+        "type": "group",
+        "z": "1dd84e968a02dc7e",
+        "name": "",
+        "style": {
+            "stroke": "#9363b7",
+            "label": true
+        },
+        "nodes": [
+            "d15ad6b7dbf367e4",
+            "b2febf1332b5b341",
+            "d6ac86588e17c91a",
+            "1c8a8d57d179cc2c",
+            "2f6f487c070fcdf1",
+            "36977a092e674277",
+            "c3e607835e466eb9",
+            "3f5995fd9f9501f3",
+            "985d0a88995a1973",
+            "7f57dba7ffc01b24",
+            "95a1bc20f0deb8c5",
+            "32e4bfa0bee14bb9"
+        ],
+        "x": 14,
+        "y": 219,
+        "w": 1092,
+        "h": 182
+    },
+    {
+        "id": "bc5cc7c1cff5d8a8",
+        "type": "group",
+        "z": "1dd84e968a02dc7e",
+        "name": "",
+        "style": {
+            "stroke": "#92d04f",
+            "label": true
+        },
+        "nodes": [
+            "dadc1f8836d8db81",
+            "b3176adae1add4b1",
+            "4c472a1c6f3ed2c5",
+            "2f8ec8aca10985a3",
+            "a2fdc9940deb30e6",
+            "392d80530c063a06",
+            "e373734895f0826b",
+            "0c979937514a9a61",
+            "7cedeee67adeb3c7",
+            "f8cd4471d06618c5",
+            "1ee241c484799b1c",
+            "45a5fe386027caf9"
+        ],
+        "x": 14,
+        "y": 19,
+        "w": 1092,
+        "h": 182
+    },
+    {
+        "id": "7ae7141f629f61f8",
+        "type": "group",
+        "z": "1dd84e968a02dc7e",
+        "name": "",
+        "style": {
+            "stroke": "#3f93cf",
+            "label": true
+        },
+        "nodes": [
+            "0fd8a9fd74ac42a3",
+            "d3846afe13f9bada",
+            "f290221f6a8fcb67",
+            "f8c85dff1562a2d9",
+            "e72fa54a6a0bea61",
+            "df9e01edb333779c",
+            "af68021475cb6a10",
+            "dcfdf1802842b86d",
+            "98d384be88b9bcf2",
+            "57e436073cfbd426",
+            "bd75c713d5eec465",
+            "ec7488d77f0acbfd",
+            "7556f84f6418181e",
+            "ac935d49cb890da9",
+            "d29f52c3b2256c38",
+            "1785b93b03ecf0c2"
+        ],
+        "x": 14,
+        "y": 419,
+        "w": 1352,
+        "h": 202
+    },
+    {
+        "id": "b3176adae1add4b1",
+        "type": "firebase-in",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "listen devices",
+        "constraint": {},
+        "database": "79a8c5635b5caad7",
+        "listenerType": "value",
+        "outputType": "auto",
+        "path": "/manage_device/add/0_dataId",
+        "useConstraint": false,
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "4c472a1c6f3ed2c5"
+            ]
+        ]
+    },
+    {
+        "id": "2f8ec8aca10985a3",
+        "type": "firebase-get",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "get new device",
+        "constraint": {},
+        "database": "79a8c5635b5caad7",
+        "outputType": "auto",
+        "passThrough": false,
+        "path": "/manage_device/add",
+        "pathType": "str",
+        "useConstraint": false,
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "7cedeee67adeb3c7",
+                "45a5fe386027caf9"
+            ]
+        ]
+    },
+    {
+        "id": "a2fdc9940deb30e6",
+        "type": "exec",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "command": "python3 /usr/src/node-red/manageDevices/addDevice_nodered.py msg.payload",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "3",
+        "winHide": false,
+        "oldrc": false,
+        "name": "add device",
+        "x": 690,
+        "y": 120,
+        "wires": [
+            [
+                "f8cd4471d06618c5"
+            ],
+            [
+                "e373734895f0826b"
+            ],
+            [
+                "0c979937514a9a61"
+            ]
+        ]
+    },
+    {
+        "id": "392d80530c063a06",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "add",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e373734895f0826b",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "0c979937514a9a61",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "ret code",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "7cedeee67adeb3c7",
+        "type": "json",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 550,
+        "y": 120,
+        "wires": [
+            [
+                "a2fdc9940deb30e6"
+            ]
+        ]
+    },
+    {
+        "id": "4c472a1c6f3ed2c5",
+        "type": "switch",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 250,
+        "y": 120,
+        "wires": [
+            [
+                "2f8ec8aca10985a3"
+            ]
+        ]
+    },
+    {
+        "id": "f8cd4471d06618c5",
+        "type": "json",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 830,
+        "y": 80,
+        "wires": [
+            [
+                "392d80530c063a06",
+                "1ee241c484799b1c"
+            ]
+        ]
+    },
+    {
+        "id": "1ee241c484799b1c",
+        "type": "firebase-out",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "send response",
+        "database": "79a8c5635b5caad7",
+        "path": "/manage_device/add",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 1000,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "dadc1f8836d8db81",
+        "type": "comment",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "Add Device",
+        "info": "",
+        "x": 110,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "d15ad6b7dbf367e4",
+        "type": "comment",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "Edit Device",
+        "info": "",
+        "x": 110,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b2febf1332b5b341",
+        "type": "firebase-in",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "listen devices",
+        "constraint": {},
+        "database": "79a8c5635b5caad7",
+        "listenerType": "value",
+        "outputType": "auto",
+        "path": "/manage_device/edit/0_dataId",
+        "useConstraint": false,
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "d6ac86588e17c91a"
+            ]
+        ]
+    },
+    {
+        "id": "d6ac86588e17c91a",
+        "type": "switch",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 250,
+        "y": 320,
+        "wires": [
+            [
+                "32e4bfa0bee14bb9"
+            ]
+        ]
+    },
+    {
+        "id": "1c8a8d57d179cc2c",
+        "type": "exec",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "command": "python3 /usr/src/node-red/manageDevices/editDevice_nodered.py msg.payload",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "3",
+        "winHide": false,
+        "oldrc": false,
+        "name": "edit device",
+        "x": 690,
+        "y": 320,
+        "wires": [
+            [
+                "985d0a88995a1973"
+            ],
+            [
+                "36977a092e674277"
+            ],
+            [
+                "c3e607835e466eb9"
+            ]
+        ]
+    },
+    {
+        "id": "2f6f487c070fcdf1",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "edit",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "36977a092e674277",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "c3e607835e466eb9",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "ret code",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "3f5995fd9f9501f3",
+        "type": "json",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 550,
+        "y": 320,
+        "wires": [
+            [
+                "1c8a8d57d179cc2c"
+            ]
+        ]
+    },
+    {
+        "id": "985d0a88995a1973",
+        "type": "json",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 830,
+        "y": 280,
+        "wires": [
+            [
+                "2f6f487c070fcdf1",
+                "7f57dba7ffc01b24"
+            ]
+        ]
+    },
+    {
+        "id": "7f57dba7ffc01b24",
+        "type": "firebase-out",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "send response",
+        "database": "79a8c5635b5caad7",
+        "path": "/manage_device/edit",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 1000,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "0fd8a9fd74ac42a3",
+        "type": "comment",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "Delete Device",
+        "info": "",
+        "x": 110,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "d3846afe13f9bada",
+        "type": "firebase-in",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "listen devices",
+        "constraint": {},
+        "database": "79a8c5635b5caad7",
+        "listenerType": "value",
+        "outputType": "auto",
+        "path": "/manage_device/delete/dataId",
+        "useConstraint": false,
+        "x": 110,
+        "y": 540,
+        "wires": [
+            [
+                "f290221f6a8fcb67"
+            ]
+        ]
+    },
+    {
+        "id": "f290221f6a8fcb67",
+        "type": "switch",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 250,
+        "y": 540,
+        "wires": [
+            [
+                "f8c85dff1562a2d9"
+            ]
+        ]
+    },
+    {
+        "id": "f8c85dff1562a2d9",
+        "type": "firebase-get",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "get del device",
+        "constraint": {},
+        "database": "79a8c5635b5caad7",
+        "outputType": "auto",
+        "passThrough": false,
+        "path": "/manage_device/delete",
+        "pathType": "str",
+        "useConstraint": false,
+        "x": 400,
+        "y": 540,
+        "wires": [
+            [
+                "98d384be88b9bcf2",
+                "1785b93b03ecf0c2"
+            ]
+        ]
+    },
+    {
+        "id": "e72fa54a6a0bea61",
+        "type": "exec",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "command": "python3 /usr/src/node-red/manageDevices/deleteDevice_nodered.py msg.payload",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "3",
+        "winHide": false,
+        "oldrc": false,
+        "name": "delete device",
+        "x": 690,
+        "y": 540,
+        "wires": [
+            [
+                "57e436073cfbd426"
+            ],
+            [
+                "af68021475cb6a10"
+            ],
+            [
+                "dcfdf1802842b86d"
+            ]
+        ]
+    },
+    {
+        "id": "df9e01edb333779c",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "delete",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "af68021475cb6a10",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "dcfdf1802842b86d",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "ret code",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "98d384be88b9bcf2",
+        "type": "json",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 550,
+        "y": 540,
+        "wires": [
+            [
+                "e72fa54a6a0bea61"
+            ]
+        ]
+    },
+    {
+        "id": "57e436073cfbd426",
+        "type": "json",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 830,
+        "y": 500,
+        "wires": [
+            [
+                "df9e01edb333779c",
+                "ec7488d77f0acbfd",
+                "ac935d49cb890da9"
+            ]
+        ]
+    },
+    {
+        "id": "bd75c713d5eec465",
+        "type": "firebase-out",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "send response",
+        "database": "79a8c5635b5caad7",
+        "path": "/manage_device/delete",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "update",
+        "x": 1140,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "ec7488d77f0acbfd",
+        "type": "switch",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "",
+        "property": "payload.response",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "success",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 970,
+        "y": 500,
+        "wires": [
+            [
+                "d29f52c3b2256c38"
+            ]
+        ]
+    },
+    {
+        "id": "7556f84f6418181e",
+        "type": "firebase-out",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "delete device",
+        "database": "79a8c5635b5caad7",
+        "path": "payload",
+        "pathType": "msg",
+        "priority": 1,
+        "queryType": "remove",
+        "x": 1270,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "ac935d49cb890da9",
+        "type": "function",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "response",
+        "func": "var response = msg.payload.response;\nvar message = msg.payload.message;\n\nvar send2firebase = {\n    \"response\": response,\n    \"message\": message\n}\n\nmsg.payload = send2firebase;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 540,
+        "wires": [
+            [
+                "bd75c713d5eec465"
+            ]
+        ]
+    },
+    {
+        "id": "d29f52c3b2256c38",
+        "type": "change",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "device_path",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.device_path",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1110,
+        "y": 500,
+        "wires": [
+            [
+                "7556f84f6418181e"
+            ]
+        ]
+    },
+    {
+        "id": "95a1bc20f0deb8c5",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "1785b93b03ecf0c2",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "7ae7141f629f61f8",
+        "name": "data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "32e4bfa0bee14bb9",
+        "type": "firebase-get",
+        "z": "1dd84e968a02dc7e",
+        "g": "dcb73e360ef77f31",
+        "name": "get edit device",
+        "constraint": {},
+        "database": "79a8c5635b5caad7",
+        "outputType": "auto",
+        "passThrough": false,
+        "path": "/manage_device/edit",
+        "pathType": "str",
+        "useConstraint": false,
+        "x": 400,
+        "y": 320,
+        "wires": [
+            [
+                "3f5995fd9f9501f3",
+                "95a1bc20f0deb8c5"
+            ]
+        ]
+    },
+    {
+        "id": "45a5fe386027caf9",
+        "type": "debug",
+        "z": "1dd84e968a02dc7e",
+        "g": "bc5cc7c1cff5d8a8",
+        "name": "data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "79a8c5635b5caad7",
+        "type": "database-config",
+        "name": "",
+        "authType": "privateKey",
+        "claims": {},
+        "createUser": false,
+        "useClaims": false
+    },
+    {
+        "id": "df9ecfaac941832c",
+        "type": "postgreSQLConfig",
+        "name": "dbOPIN",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "opin",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "opin",
+        "userFieldType": "str",
+        "password": "postgresql",
+        "passwordFieldType": "str"
+    }
+]
