@@ -3,14 +3,14 @@
 ![Jetson Nano](https://github.com/OPIN-Smart-Home/OPIN-JetsonNano-public/blob/main/asset/JetsonNano.png)
 
 ## Table of Contents
-For Users
+For User
 - [Introduction](#introduction)
 - [Features](#features)
 - [Peripherals](#peripherals)
 - [User Guide](#user-guide)
 - [Auto Off Feature](#auto-off-feature)
 
-For Developers
+For Developer
 - [Installation](#installation)
 - [Device Manager System (Node-RED)](#device-manager-system-node-red)
 - [Auto-Off System (Human Detection)](#auto-off-system-human-detection)
@@ -23,7 +23,7 @@ Additional Information
  ---
  ---
 
-# For Users
+# For User
 ## Introduction
 The Jetson Nano serves as the central gateway for the OPIN Smart Home system, acting as the brain that manages smart home devices and ensures efficient automation. Its primary tasks include monitoring and controlling connected devices such as smart lights, IP cameras, and smart locks. Additionally, the Jetson Nano leverages its powerful AI capabilities to run real-time human detection, which plays a crucial role in the system's automation.
 
@@ -120,8 +120,8 @@ By leveraging the Auto Off feature, users can enjoy the convenience of smart lig
 ---
 ---
 
-# For Developers
-This section provides guidelines for developers looking to contribute to the OPIN Smart Home system. It's recommended to pay attention on [For Users](#for-users) section.
+# For Developer
+This section provides guidelines for developers looking to contribute to the OPIN Smart Home system. It's recommended to pay attention on [For User](#for-user) section.
 
 ## Installation
 This section is intended for a new or freshly purchased Jetson Nano that has not yet been set up.
@@ -309,7 +309,7 @@ The Auto-Off System leverages human detection technology to enhance energy effic
 - **Data Transfer**: TLS is not implemented for secure data transfer between the Jetson Nano and connected devices.
 - **Initial Setup**: The Jetson Nano must be connected to a display, mouse, and keyboard for the first-time gateway setup.
 - **IP Camera Limitation**: The system is limited to only one IP camera for the auto-off functionality.
-- **AC Control Device**: The control of AC devices is limited to Panasonic. ~~Users~~ Developers must manually add IR data to the PostgreSQL database.
+- **AC Control Device**: The control of AC devices is limited to Panasonic. ~~User~~ Developer must manually add IR data to the PostgreSQL database.
 
 
 ## Future Development
