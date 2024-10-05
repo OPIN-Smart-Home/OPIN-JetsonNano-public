@@ -8,6 +8,7 @@ For Users
 - [Features](#features)
 - [Peripherals](#peripherals)
 - [User Guide](#user-guide)
+- [Auto Off Feature](#auto-off-feature)
 
 For Developers
 - [Installation](#installation)
@@ -100,6 +101,20 @@ Follow these steps to get started with setting up and using your smart home devi
 - **Check Connection**: Ensure that the devices and the Jetson Nano are on the same local network, and confirm that the Jetson Nano is connected to the internet.
 - **Rebooting Devices**: Try rebooting the Jetson Nano through ``RESET`` button.
 - **Re-adding Devices**: If a device is consistently unresponsive, you may need to remove it from the dashboard and add it again.
+
+
+## Auto Off Feature
+The OPIN SmartLamp includes an **Auto Off** feature designed to enhance energy efficiency by automatically turning off the lamp when no one is detected in the room. This feature utilizes a single IP camera to monitor the room and determine occupancy.
+### Requirements
+To utilize the Auto Off feature, users need to provide the following information in the OPIN mobile app:
+- **IP Address**: The local IP address of the connected IP camera.
+- **RTSP Link**: The Real-Time Streaming Protocol (RTSP) link for the IP camera. This link allows the SmartLamp to access the camera's video stream for occupancy detection.
+### IP Camera Compatibility
+Any IP camera that supports RTSP can be used for the Auto Off feature. Ensure that the selected IP camera is properly configured and positioned to effectively monitor the area where the SmartLamp is located.
+### Note
+- Only one IP camera can be used for the Auto Off feature. 
+- Properly configuring the IP address and RTSP link is essential for the successful operation of the Auto Off feature. Incorrect settings may prevent the SmartLamp from functioning as intended.
+By leveraging the Auto Off feature, users can enjoy the convenience of smart devices while also promoting energy conservation in their homes.
 
 ---
 ---
