@@ -18,6 +18,7 @@ For Developer
 - [Future Development](#future-development)
 
 Additional Information
+- [OPIN Smart Home Devices](#opin-smart-home-devices)
 - [Further Information](#further-information)
 
  ---
@@ -324,7 +325,15 @@ The Auto-Off System leverages human detection technology to enhance energy effic
 ---
 ---
 
-# Further Information
+# Additional Information
+## OPIN Smart Home Devices
+Other devices:
+- [OPIN Smart Lamp](<https://github.com/OPIN-Smart-Home/SmartLamp>)
+- [OPIN Smart kWh Meter](<https://github.com/OPIN-Smart-Home/kWhMeter>)
+- [OPIN Smart Door Lock](<https://github.com/OPIN-Smart-Home/DoorLock>)
+- [OPIN Smart AC Control](<https://github.com/OPIN-Smart-Home/ACControl>)
+
+## Further Information
 For further information, please feel free to contact me at:
 - **Email**: [anisahfarah28@gmail.com](mailto:anisahfarah28@gmail.com)
 - **LinkedIn**: [Anisah Farah Fadhilah](https://www.linkedin.com/in/anisahfarahfadhilah)
