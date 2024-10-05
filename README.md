@@ -110,11 +110,12 @@ To utilize the Auto Off feature, users need to provide the following information
 - **IP Address**: The local IP address of the connected IP camera.
 - **RTSP Link**: The Real-Time Streaming Protocol (RTSP) link for the IP camera. This link allows the SmartLamp to access the camera's video stream for occupancy detection.
 ### IP Camera Compatibility
-Any IP camera that supports RTSP can be used for the Auto Off feature. Ensure that the selected IP camera is properly configured and positioned to effectively monitor the area where the SmartLamp is located.
+- Any IP camera that supports RTSP can be used for the Auto Off feature. Ensure that the selected IP camera is properly configured and positioned to effectively monitor the area where the SmartLamp is located.
+### Limitation
+- Only one IP camera can be used for the Auto Off feature due to the limitations of the Jetson Nano, which can only run detection algorithms for a single IP camera at a time. This restriction ensures optimal performance and responsiveness in occupancy detection.
 ### Note
-- Only one IP camera can be used for the Auto Off feature. 
 - Properly configuring the IP address and RTSP link is essential for the successful operation of the Auto Off feature. Incorrect settings may prevent the SmartLamp from functioning as intended.
-By leveraging the Auto Off feature, users can enjoy the convenience of smart devices while also promoting energy conservation in their homes.
+By leveraging the Auto Off feature, users can enjoy the convenience of smart lighting while also promoting energy conservation in their homes.
 
 ---
 ---
