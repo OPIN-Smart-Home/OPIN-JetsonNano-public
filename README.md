@@ -13,6 +13,7 @@ For User
 - [Auto Off Feature](#auto-off-feature)
 
 For Developer
+- [Architecture](#architecture)
 - [Installation](#installation)
 - [Device Manager System (Node-RED)](#device-manager-system-node-red)
 - [Auto-Off System (Human Detection)](#auto-off-system-human-detection)
@@ -125,6 +126,31 @@ By leveraging the Auto Off feature, users can enjoy the convenience of smart lig
 
 # For Developer
 This section provides guidelines for developers looking to contribute to the OPIN Smart Home system. It's recommended to pay attention on [For User](#for-user) section.
+
+## Architecture
+The OPIN Gateway, running on the Jetson Nano, serves as the central hub for controlling and managing various smart home devices while integrating with cloud services. The architecture diagram below illustrates the key components and communication flow within the OPIN system:
+
+![OPIN Gateway Architecture](<https://github.com/OPIN-Smart-Home/OPIN-JetsonNano-public/blob/main/asset/architecture.png>)
+
+### Key Components:
+- **Jetson Nano**: The core processing unit. Serves as the gateway for managing devices and running human detection for the Auto Off feature. The Jetson Nano uses Docker containers to isolate services and ensure smooth operations.
+- **Docker**: Manages containers running the application services.
+  - **Node-RED**: 
+    - Manages device control (air conditioners, door locks, lights, power monitors, etc.) and handles device management operations like adding, editing, and deleting devices.
+    - Actively listens to [Firebase Realtime Database](<https://firebase.google.com/products/realtime-database>), retrieving device states and commands, and uploading data.
+    - Converts human-readable AC control commands into raw IR data and sends it to the OPIN AC Control device based on commands received from the mobile app via Firebase.
+  - **PostgreSQL**: Stores raw IR data for air conditioner control.
+  - [**YOLOv8 (Ultralytics)**](<https://docs.ultralytics.com/models/yolov8/>): Provides real-time human detection from CCTV camera streams via RTSP to enable auto-off functionalities for smart devices.
+- **Firebase**: The cloud backend used for real-time synchronization and communication between the mobile app and the OPIN Gateway.
+- **MQTT**: Used for communication between the OPIN Gateway and smart home devices.
+- **RTSP**: For real-time video streaming from CCTV cameras for human detection.
+
+### Communication Protocols:
+- **HTTP**: Used to communicate with Firebase for real-time database updates.
+- **MQTT**: The communication protocol used between the OPIN Gateway and smart devices (Air Conditioner, Door Lock, Light, Electrical Power Monitoring).
+- **RTSP**: Used for video streaming from CCTV cameras to the YOLOv8 module for processing and real-time human detection.
+
+This architecture allows the OPIN Gateway to not only control smart devices but also manage the addition, modification, and removal of connected devices, ensuring a flexible and scalable smart home ecosystem.
 
 ## Installation
 This section is intended for a new or freshly purchased Jetson Nano that has not yet been set up.
