@@ -1,5 +1,7 @@
 # Nvidia Jetson Nano as the Gateway for OPIN Smart Home System
 
+[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 ![Jetson Nano](https://github.com/OPIN-Smart-Home/OPIN-JetsonNano-public/blob/main/asset/JetsonNano.png)
 
 ## Table of Contents
