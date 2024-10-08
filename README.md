@@ -22,6 +22,7 @@ For Developer
 
 Additional Information
 - [OPIN Smart Home Devices](#opin-smart-home-devices)
+- [Acknowledgments](#acknowledgments)
 - [Further Information](#further-information)
 
  ---
@@ -182,7 +183,7 @@ This section is intended for a new or freshly purchased Jetson Nano that has not
     ```
 
 4. **Fan Configuration (Optional)**  
-    To configure the fan, edit [``/fan/config.json``](https://github.com/OPIN-Smart-Home/OPIN-JetsonNano-public/blob/main/fan/config.json). For further information, visit [jetson fan repository](<https://github.com/Pyrestone/jetson-fan-ctl.git>). Default configuration:
+    To configure the fan, edit [``/fan/config.json``](https://github.com/OPIN-Smart-Home/OPIN-JetsonNano-public/blob/main/fan/config.json). For further information, visit [jetson-fan-ctl repository](<https://github.com/Pyrestone/jetson-fan-ctl>). Default configuration:
 
     ```json
     {
@@ -194,7 +195,7 @@ This section is intended for a new or freshly purchased Jetson Nano that has not
     ```
 
 5. **Swapfile Configuration (Optional)**  
-    To configure the swapfile, edit this line below in [``init.sh``](https://github.com/OPIN-Smart-Home/OPIN-JetsonNano-public/blob/main/init.sh). Default configuration is 12 GB.
+    To configure the swapfile, edit this line below in [``init.sh``](https://github.com/OPIN-Smart-Home/OPIN-JetsonNano-public/blob/main/init.sh). For further information, visit [installSwapfile repository](<https://github.com/JetsonHacksNano/installSwapfile>). Default configuration is 12 GB.
     ```bash
     ./installSwapfile.sh -s 12
     ```
@@ -317,14 +318,13 @@ The Auto-Off System leverages human detection technology to enhance energy effic
 
 ### Additional
 1. **Monitor Gateway Resources**  
-    Resources of the Jetson Nano gateway can be monitored using `jtop`, which is especially useful for tracking GPU usage. Run `jtop` to start monitoring:
+    Resources of the Jetson Nano gateway can be monitored using `jtop`, which is especially useful for tracking GPU usage. For further information, visit [jetson_stats repository](<https://github.com/rbonghi/jetson_stats>). Run `jtop` to start monitoring:
      ```bash
      jtop
      ```
 
 2. **Experimental Files**  
    These files are located in [``etc``](https://github.com/OPIN-Smart-Home/OPIN-JetsonNano-public/tree/main/etc) directory and consist of previous trials and errors that might still be useful for future development.
-
 
 3. **Gateway / Jetson Nano UID**  
     The UID consists of 16 random characters. This UID is used to identify the gateway and serves as authentication for users attempting to connect to the gateway for the first time. The UID is generated, hard-coded, and stored in [``/nodeRED/uid.txt``](https://github.com/OPIN-Smart-Home/OPIN-JetsonNano-public/blob/main/nodeRED/uid.txt) and [``/autoOffCam/uid.txt``](https://github.com/OPIN-Smart-Home/OPIN-JetsonNano-public/blob/main/autoOffCam/uid.txt).
@@ -360,6 +360,16 @@ Other devices:
 - [OPIN Smart kWh Meter](<https://github.com/OPIN-Smart-Home/kWhMeter>)
 - [OPIN Smart Door Lock](<https://github.com/OPIN-Smart-Home/DoorLock>)
 - [OPIN Smart AC Control](<https://github.com/OPIN-Smart-Home/ACControl>)
+
+## Acknowledgments
+This project makes use of:  
+- [jetson-fan-ctl](<https://github.com/Pyrestone/jetson-fan-ctl>) by [Pyrestone](<https://github.com/Pyrestone>) (Marc Uecker), under [MIT license](<https://github.com/Pyrestone/jetson-fan-ctl/blob/master/LICENSE>).
+- [installSwapfile](<https://github.com/JetsonHacksNano/installSwapfile>) by [JetsonHacksNano](<https://github.com/JetsonHacksNano>), under [MIT license](<https://github.com/JetsonHacksNano/installSwapfile/blob/master/LICENSE>).
+- [jetson_stats](<https://github.com/rbonghi/jetson_stats>) by [rbonghi](<https://github.com/rbonghi>) (Raffaello Bonghi), under [AGPL-3.0 license](<https://github.com/rbonghi/jetson_stats/blob/master/LICENSE>).
+- [node-red-contrib-firebase-realtime-database](<https://github.com/GogoVega/node-red-contrib-firebase-realtime-database>) by [GogoVega](<https://github.com/GogoVega>) (Gauthier Dandele), under [MIT license](<https://github.com/GogoVega/node-red-contrib-firebase-realtime-database/blob/master/LICENSE>).
+- [node-red-contrib-postgresql](<https://github.com/alexandrainst/node-red-contrib-postgresql>) by [Alexandra Institute](<https://github.com/alexandrainst>), under [Apache-2.0 license](<https://github.com/alexandrainst/node-red-contrib-postgresql/blob/main/LICENSE.md>).
+
+We appreciate their efforts and contributions, which have been instrumental in the development of this project.
 
 ## Further Information
 For further information, please feel free to contact me at:
